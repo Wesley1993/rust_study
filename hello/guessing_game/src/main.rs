@@ -1,4 +1,4 @@
-use std::io;
+use std::{io, cmp::Ordering};
 use rand::Rng;
 
 fn main() {
@@ -19,4 +19,12 @@ fn main() {
     io::stdin().read_line(&mut guess).expect("无法读取数");
 
     println!("你猜测的数字为：{}",guess);
+
+    let guess:u32 = guess.trim().parse().expect("please type a number");
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("too small"),
+        Ordering::Greater => println!("too big"),
+        Ordering::Equal => println!("you win!")
+    }
 }
